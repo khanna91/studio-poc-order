@@ -1,0 +1,13 @@
+{
+  "generator-astro": {
+    "name": "studio-order-service",
+    "apibase": "api",
+    "apiversion": "v1",
+    "port": "3000",
+    "version": "0.1.0",
+    "description": "",
+    "author": "Rahul Khanna",
+    "sequelize": "y",
+    "src": "src"
+  }
+}

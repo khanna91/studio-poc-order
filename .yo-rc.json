@@ -8,6 +8,8 @@
     "description": "",
     "author": "Rahul Khanna",
     "sequelize": "y",
-    "src": "src"
+    "src": "src",
+    "last_service": "order",
+    "last_util": "helper"
   }
 }

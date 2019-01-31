@@ -5,6 +5,7 @@
 const _ = require('lodash');
 const { Order } = require('@models');
 const { ORDER_STATUS } = require('@utils/helper');
+const { APIError } = require('@utils/APIError');
 
 const createOrder = async (body) => {
   try {
@@ -13,14 +14,14 @@ const createOrder = async (body) => {
     const order = await Order.create(params);
     return order.toJSON();
   } catch (err) {
-    throw new Error('ORDER_NOT_CREATED');
+    throw APIError.withCode('ORDER_NOT_CREATED');
   }
 };
 
 const getOrder = async (orderId) => {
   const order = await Order.findById(orderId);
   if (!order) {
-    throw new Error('ORDER_NOT_FOUND');
+    throw APIError.withCode('ORDER_NOT_FOUND');
   }
   return order.toJSON();
 };

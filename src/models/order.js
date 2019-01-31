@@ -9,9 +9,8 @@ module.exports = (sequelize, DataTypes) => {
     coupon: DataTypes.STRING,
     discount: DataTypes.JSON,
     amountToBePaid: DataTypes.FLOAT,
-    paymentId: DataTypes.UUID,
     status: DataTypes.STRING
-  }, { paranoid: true });
+  }, {});
   // Order.associate = function(models) {
     // associations can be defined here
   // };

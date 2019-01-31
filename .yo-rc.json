@@ -9,7 +9,10 @@
     "author": "Rahul Khanna",
     "sequelize": "y",
     "src": "src",
-    "last_service": "order",
-    "last_util": "helper"
+    "last_service": "coupon",
+    "last_util": "helper",
+    "last_endpoint": "create",
+    "last_apidesc": "description",
+    "last_method": "post"
   }
 }

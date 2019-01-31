@@ -26,10 +26,6 @@ module.exports = {
       amountToBePaid: {
         type: Sequelize.FLOAT
       },
-      paymentId: {
-        type: Sequelize.UUID,
-        allowNull: true
-      },
       status: {
         type: Sequelize.STRING
       },
@@ -39,9 +35,6 @@ module.exports = {
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      },
-      deletedAt: {
         type: Sequelize.DATE
       }
     });

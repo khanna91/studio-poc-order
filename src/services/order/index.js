@@ -1,3 +1,11 @@
-const orderService = require('./order.service');
+const {
+  create,
+  get,
+  updateOrderStatus
+} = require('./order.service');
 
-module.exports = orderService;
+module.exports = {
+  create,
+  get,
+  updateOrderStatus
+};

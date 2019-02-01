@@ -6,9 +6,9 @@ const updateStatusRoute = require('./update-status');
 const getRoute = require('./get');
 
 
-router.use('/order', createRoute);
-router.use('/order', updateStatusRoute);
-router.use('/order', getRoute);
+router.use('/', createRoute);
+router.use('/', updateStatusRoute);
+router.use('/', getRoute);
 
 
 module.exports = router;

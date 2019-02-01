@@ -90,8 +90,7 @@ describe('Service - update order status', () => {
   });
 
   it('should able to update order status', () => {
-    Order.findById = jest.fn(() => Promise.resolve({ id: 1 }));
-    Order.save = jest.fn(() => Promise.resolve({ id: 1 }));
+    Order.findById = jest.fn(() => Promise.resolve({ id: 1, save: () => Promise.resolve({ id: 1 }) }));
     service.updateOrderStatus(orderId, status).then((order) => {
       expect(order).toBeObject();
     });
@@ -117,8 +116,7 @@ describe('Service - update order status', () => {
   });
 
   it('should throw error while updating the order', () => {
-    Order.findById = jest.fn(() => Promise.resolve({ id: 1 }));
-    Order.save = jest.fn(() => Promise.reject(new Error('DBFAIL')));
+    Order.findById = jest.fn(() => Promise.resolve({ id: 1, save: () => Promise.reject(new Error('DBFAIL')) }));
     service.updateOrderStatus(orderId, status).catch((err) => {
       expect(err).toHaveProperty('name');
       expect(err).toHaveProperty('errors');

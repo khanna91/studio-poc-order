@@ -6,7 +6,7 @@ const { randomNumberGenerator } = require('@utils/helper');
 
 /**
   * This is a mock function,
-  * whose job is to return the unit prices of all the products by talking to product service
+  * whose job is to return the unit prices of all the products by talking to product service (micro)
   *
   * @param {Array} productsSkus       Product unique identifier
   * @param {String} currency          The currency in which prices required

@@ -10,8 +10,8 @@ const ORDER_STATUS = {
 exports.ORDER_STATUS = ORDER_STATUS;
 
 const discountType = {
-  AMOUNT: 'Amount',
-  PERCENT: 'Percent'
+  AMOUNT: 'AMOUNT',
+  PERCENT: 'PERCENT'
 };
 
 exports.discountType = discountType;
@@ -45,7 +45,7 @@ const formulateOrder = (body, result) => {
   if (discount) {
     if (discount.type === discountType.PERCENT) {
       amountToBePaid = amount - ((discount.value / amount) * 100);
-    } else if (discount.type === discountType.AMOUNT) {
+    } else {
       amountToBePaid = amount - discount.value;
     }
   }
@@ -55,7 +55,8 @@ const formulateOrder = (body, result) => {
     coupon: body.coupon,
     amount,
     discount,
-    amountToBePaid
+    amountToBePaid,
+    meta
   };
 };
 

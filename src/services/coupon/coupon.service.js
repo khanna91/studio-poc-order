@@ -7,15 +7,16 @@ const { APIError } = require('@utils/APIError');
 
 /**
   * This is a mock function,
-  * whose function is to talk to coupon service, verifies the coupon and get details related to that
+  * whose function is to talk to coupon service (micro), verifies the coupon and get details related to that
   *
   * @param {String} couponCode        Coupon Code which user tries to redeem
   */
-const getCouponValue = (couponCode) => {
+const getCouponValue = async (couponCode) => {
   if (couponCode !== 'FREETRIAL') {
     throw APIError.withCode('INVALID_COUPON');
   }
   // mock logic to get disount in % or amount
+  /* istanbul ignore next */
   let type = discountType.AMOUNT;
   let value = randomNumberGenerator(10, 15);
   const randomType = randomNumberGenerator(1, 10);

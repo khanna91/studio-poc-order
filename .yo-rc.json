@@ -11,8 +11,8 @@
     "src": "src",
     "last_service": "coupon",
     "last_util": "helper",
-    "last_endpoint": "create",
+    "last_endpoint": "get",
     "last_apidesc": "description",
-    "last_method": "post"
+    "last_method": "get"
   }
 }

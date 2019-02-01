@@ -1,6 +1,7 @@
 const _ = require('lodash');
 const ProductService = require('@services/product');
 const CouponService = require('@services/coupon');
+const OrderService = require('@services/order');
 const { formulateOrder, OK } = require('@utils/helper');
 
 /**
@@ -18,7 +19,8 @@ exports.create = async (req, res, next) => {
     }
     const result = await Promise.all(promises);
     const order = formulateOrder(body, result);
-    return OK(res, 'Order Created', order);
+    const response = await OrderService.create(order);
+    return OK(res, 'Order Created', response);
   } catch (error) {
     return next(error);
   }

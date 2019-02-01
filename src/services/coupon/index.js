@@ -1,3 +1,5 @@
-const couponService = require('./coupon.service');
+const { getCouponValue } = require('./coupon.service');
 
-module.exports = couponService;
+module.exports = {
+  getCouponValue
+};

@@ -1,11 +1,14 @@
 const Joi = require('joi');
 
 module.exports = {
-  name: 'get',
-  path: '/api/v1/get',
+  name: 'Get Order Detail',
+  path: '/api/v1/:orderId',
   type: 'get',
-  joiSchema: {
+  JoiSchema: {
     params: {
+      orderId: Joi.string().guid().required()
+    },
+    path: {
       orderId: Joi.string().guid().required()
     },
     response: {
@@ -14,7 +17,17 @@ module.exports = {
         body: {
           responseCode: 200,
           responseMessage: Joi.string().required(),
-          response: {}
+          response: {
+            id: Joi.string().guid().required(),
+            userId: Joi.string().guid().required(),
+            currency: Joi.string().required(),
+            amount: Joi.number().required(),
+            coupon: Joi.string(),
+            discount: Joi.object(),
+            amountToBePaid: Joi.number().required(),
+            meta: Joi.array().items(Joi.object()).required(),
+            status: Joi.string().required()
+          }
         }
       },
       400: {

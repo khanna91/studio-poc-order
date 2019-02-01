@@ -1,0 +1,567 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Order Service for production environment",
+        "version": "1.0.0",
+        "title": "Order Service production",
+        "contact": {
+            "email": "khanna.mailme@gmail.com"
+        }
+    },
+    "basePath": "/api",
+    "schemes": [
+        "http",
+        "https"
+    ],
+    "paths": {
+        "/api/api/v1": {
+            "post": {
+                "summary": "Create New Order",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/CreateNewOrderPostBody"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/CreateNewOrderPost200Response"
+                        }
+                    },
+                    "400": {
+                        "description": "Error Response",
+                        "schema": {
+                            "$ref": "#/definitions/CreateNewOrderPost400Response"
+                        }
+                    }
+                },
+                "deprecated": false,
+                "x-amazon-apigateway-integration": {
+                    "passthroughBehavior": "when_no_match",
+                    "httpMethod": "post",
+                    "type": "http_proxy",
+                    "uri": "http://${stageVariables.url}/api/api/v1",
+                    "responses": {
+                        "default": {
+                            "statusCode": "200"
+                        }
+                    },
+                    "requestParameters": {},
+                    "responseParameters": {}
+                }
+            }
+        },
+        "/api/api/v1/{orderId}": {
+            "get": {
+                "summary": "Get Order Detail",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "orderId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/GetOrderDetailGet200Response"
+                        }
+                    },
+                    "400": {
+                        "description": "Error Response",
+                        "schema": {
+                            "$ref": "#/definitions/GetOrderDetailGet400Response"
+                        }
+                    }
+                },
+                "deprecated": false,
+                "x-amazon-apigateway-integration": {
+                    "passthroughBehavior": "when_no_match",
+                    "httpMethod": "get",
+                    "type": "http_proxy",
+                    "uri": "http://${stageVariables.url}/api/api/v1/{orderId}",
+                    "responses": {
+                        "default": {
+                            "statusCode": "200"
+                        }
+                    },
+                    "requestParameters": {
+                        "integration.request.path.orderId": "method.request.path.orderId"
+                    },
+                    "responseParameters": {}
+                }
+            },
+            "patch": {
+                "summary": "Update Order Status",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/UpdateOrderStatusPatchBody"
+                        }
+                    },
+                    {
+                        "name": "orderId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/UpdateOrderStatusPatch200Response"
+                        }
+                    },
+                    "400": {
+                        "description": "Error Response",
+                        "schema": {
+                            "$ref": "#/definitions/UpdateOrderStatusPatch400Response"
+                        }
+                    }
+                },
+                "deprecated": false,
+                "x-amazon-apigateway-integration": {
+                    "passthroughBehavior": "when_no_match",
+                    "httpMethod": "patch",
+                    "type": "http_proxy",
+                    "uri": "http://${stageVariables.url}/api/api/v1/{orderId}",
+                    "responses": {
+                        "default": {
+                            "statusCode": "200"
+                        }
+                    },
+                    "requestParameters": {
+                        "integration.request.path.orderId": "method.request.path.orderId"
+                    },
+                    "responseParameters": {}
+                }
+            }
+        }
+    },
+    "definitions": {
+        "CreateNewOrderPostBody": {
+            "type": "object",
+            "required": [
+                "userId",
+                "currency",
+                "orderItems"
+            ],
+            "properties": {
+                "userId": {
+                    "type": "string"
+                },
+                "currency": {
+                    "type": "string"
+                },
+                "coupon": {
+                    "type": "string"
+                },
+                "orderItems": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "required": [
+                            "sku",
+                            "quantity"
+                        ],
+                        "properties": {
+                            "sku": {
+                                "type": "string"
+                            },
+                            "quantity": {
+                                "type": "number",
+                                "format": "float"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "CreateNewOrderPost200Response": {
+            "type": "object",
+            "required": [
+                "responseMessage"
+            ],
+            "properties": {
+                "responseCode": {
+                    "type": "number",
+                    "format": "float",
+                    "enum": [
+                        200
+                    ]
+                },
+                "responseMessage": {
+                    "type": "string"
+                },
+                "response": {
+                    "type": "object",
+                    "required": [
+                        "id",
+                        "userId",
+                        "currency",
+                        "amount",
+                        "amountToBePaid",
+                        "meta",
+                        "status"
+                    ],
+                    "properties": {
+                        "id": {
+                            "type": "string"
+                        },
+                        "userId": {
+                            "type": "string"
+                        },
+                        "currency": {
+                            "type": "string"
+                        },
+                        "amount": {
+                            "type": "number",
+                            "format": "float"
+                        },
+                        "coupon": {
+                            "type": "string"
+                        },
+                        "discount": {
+                            "type": "object",
+                            "properties": {}
+                        },
+                        "amountToBePaid": {
+                            "type": "number",
+                            "format": "float"
+                        },
+                        "meta": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {}
+                            }
+                        },
+                        "status": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "CreateNewOrderPost400Response": {
+            "type": "object",
+            "required": [
+                "responseMessage"
+            ],
+            "properties": {
+                "responseCode": {
+                    "type": "number",
+                    "format": "float",
+                    "enum": [
+                        400
+                    ]
+                },
+                "responseMessage": {
+                    "type": "string"
+                },
+                "response": {
+                    "type": "object",
+                    "properties": {
+                        "errors": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "required": [
+                                    "errorCode",
+                                    "errorTitle",
+                                    "errorDescription"
+                                ],
+                                "properties": {
+                                    "errorCode": {
+                                        "type": "string"
+                                    },
+                                    "errorTitle": {
+                                        "type": "string"
+                                    },
+                                    "errorDescription": {
+                                        "type": "string"
+                                    },
+                                    "errorDebugDescription": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "GetOrderDetailGet200Response": {
+            "type": "object",
+            "required": [
+                "responseMessage"
+            ],
+            "properties": {
+                "responseCode": {
+                    "type": "number",
+                    "format": "float",
+                    "enum": [
+                        200
+                    ]
+                },
+                "responseMessage": {
+                    "type": "string"
+                },
+                "response": {
+                    "type": "object",
+                    "required": [
+                        "id",
+                        "userId",
+                        "currency",
+                        "amount",
+                        "amountToBePaid",
+                        "meta",
+                        "status"
+                    ],
+                    "properties": {
+                        "id": {
+                            "type": "string"
+                        },
+                        "userId": {
+                            "type": "string"
+                        },
+                        "currency": {
+                            "type": "string"
+                        },
+                        "amount": {
+                            "type": "number",
+                            "format": "float"
+                        },
+                        "coupon": {
+                            "type": "string"
+                        },
+                        "discount": {
+                            "type": "object",
+                            "properties": {}
+                        },
+                        "amountToBePaid": {
+                            "type": "number",
+                            "format": "float"
+                        },
+                        "meta": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {}
+                            }
+                        },
+                        "status": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "GetOrderDetailGet400Response": {
+            "type": "object",
+            "required": [
+                "responseMessage"
+            ],
+            "properties": {
+                "responseCode": {
+                    "type": "number",
+                    "format": "float",
+                    "enum": [
+                        400
+                    ]
+                },
+                "responseMessage": {
+                    "type": "string"
+                },
+                "response": {
+                    "type": "object",
+                    "properties": {
+                        "errors": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "required": [
+                                    "errorCode",
+                                    "errorTitle",
+                                    "errorDescription"
+                                ],
+                                "properties": {
+                                    "errorCode": {
+                                        "type": "string"
+                                    },
+                                    "errorTitle": {
+                                        "type": "string"
+                                    },
+                                    "errorDescription": {
+                                        "type": "string"
+                                    },
+                                    "errorDebugDescription": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "UpdateOrderStatusPatchBody": {
+            "type": "object",
+            "required": [
+                "status"
+            ],
+            "properties": {
+                "status": {
+                    "type": "string",
+                    "enum": [
+                        "CONFIRMED",
+                        "DELIVERED",
+                        "CANCELLED"
+                    ]
+                }
+            }
+        },
+        "UpdateOrderStatusPatch200Response": {
+            "type": "object",
+            "required": [
+                "responseMessage"
+            ],
+            "properties": {
+                "responseCode": {
+                    "type": "number",
+                    "format": "float",
+                    "enum": [
+                        200
+                    ]
+                },
+                "responseMessage": {
+                    "type": "string"
+                },
+                "response": {
+                    "type": "object",
+                    "required": [
+                        "id",
+                        "userId",
+                        "currency",
+                        "amount",
+                        "amountToBePaid",
+                        "meta",
+                        "status"
+                    ],
+                    "properties": {
+                        "id": {
+                            "type": "string"
+                        },
+                        "userId": {
+                            "type": "string"
+                        },
+                        "currency": {
+                            "type": "string"
+                        },
+                        "amount": {
+                            "type": "number",
+                            "format": "float"
+                        },
+                        "coupon": {
+                            "type": "string"
+                        },
+                        "discount": {
+                            "type": "object",
+                            "properties": {}
+                        },
+                        "amountToBePaid": {
+                            "type": "number",
+                            "format": "float"
+                        },
+                        "meta": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {}
+                            }
+                        },
+                        "status": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "UpdateOrderStatusPatch400Response": {
+            "type": "object",
+            "required": [
+                "responseMessage"
+            ],
+            "properties": {
+                "responseCode": {
+                    "type": "number",
+                    "format": "float",
+                    "enum": [
+                        400
+                    ]
+                },
+                "responseMessage": {
+                    "type": "string"
+                },
+                "response": {
+                    "type": "object",
+                    "properties": {
+                        "errors": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "required": [
+                                    "errorCode",
+                                    "errorTitle",
+                                    "errorDescription"
+                                ],
+                                "properties": {
+                                    "errorCode": {
+                                        "type": "string"
+                                    },
+                                    "errorTitle": {
+                                        "type": "string"
+                                    },
+                                    "errorDescription": {
+                                        "type": "string"
+                                    },
+                                    "errorDebugDescription": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

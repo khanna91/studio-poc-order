@@ -21,6 +21,6 @@ const router = express.Router();
  * @apiError (Bad Request 400)  ValidationError  Some parameters may contain invalid values
  */
 router.route('/:orderId')
-  .get(validate(validator.joiSchema), controller.get);
+  .get(validate(validator.JoiSchema), controller.get);
 
 module.exports = router;

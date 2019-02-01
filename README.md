@@ -72,9 +72,6 @@ yarn test
 # run unit tests with coverage
 yarn test:unit
 
-# run integration tests
-yarn test:integration
-
 # run all tests and watch for changes
 yarn test:watch
 ```
